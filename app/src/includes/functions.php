@@ -41,3 +41,22 @@ function respondeJson(int $status, object | bool | null $content = null, object 
 
     exit;
 }
+
+/**
+ * Ensures the user is authenticated; otherwise, it responds with 401 and exits.
+ */
+function requireAuth(): void {
+    if (empty($_SESSION['logged'])) {
+        respondeJson(401, null, (object) ["message" => "Sessão expirada. Faça login novamente."]);
+    }
+}
+
+/**
+ * Reads and decodes the JSON body of the current request.
+ */
+function getJsonBody(): array {
+    $raw = file_get_contents('php://input');
+    $data = json_decode($raw, true);
+
+    return is_array($data) ? $data : [];
+}
