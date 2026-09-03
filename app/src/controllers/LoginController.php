@@ -16,8 +16,9 @@ $result = makeLogin($login, $password);
 if($result == null)
     respondeJson(200, null, (object) [ "message" => "Error logging in; please try again later." ]);
 else {
-    $_SESSION["userId"] = $result;
+    $_SESSION["userId"] = $result->id;
     $_SESSION["logged"] = true;
+    $_SESSION["userName"] = $result->name;
 
     respondeJson(200, true);
 }

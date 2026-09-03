@@ -1,3 +1,5 @@
+@import url("global.css");
+
 * {
   box-sizing: border-box;
 }
@@ -345,8 +347,41 @@ form {
     padding: 24px 16px;
   }
 
+  .page {
+    height: auto;
+    min-height: 100dvh;
+  }
+
   .login-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: min(680px, calc(100dvh - 48px));
     padding: 32px 22px 30px;
+  }
+
+  .panel-brand {
+    margin-bottom: 38px;
+  }
+
+  form {
+    gap: 24px;
+  }
+
+  .input-wrap .icon,
+  .input-wrap input,
+  .toggle-password,
+  .submit-btn {
+    height: 58px;
+  }
+
+  .input-wrap .icon {
+    width: 52px;
+    min-width: 52px;
+  }
+
+  .info {
+    padding: 14px;
   }
 }
 

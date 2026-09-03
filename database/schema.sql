@@ -11,6 +11,7 @@ USE app_db;
 CREATE TABLE IF NOT EXISTS `user` (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     login VARCHAR(80) NOT NULL UNIQUE,
+    name VARCHAR(180) NOT NULL,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -47,8 +48,8 @@ CREATE TABLE IF NOT EXISTS `card` (
 );
 
 -- Insert user
-INSERT INTO user (login, password, created_at) VALUES
-('ADMIN', "$2y$10$nFHLEwKjs4l2UW6aNRZfDugcFMRgMJEh/4R9uMwcNK8PVmlFdv9d2", NOW());
+INSERT INTO user (login, name, password, created_at) VALUES
+('ADMIN', 'Administrador', "$2y$10$nFHLEwKjs4l2UW6aNRZfDugcFMRgMJEh/4R9uMwcNK8PVmlFdv9d2", NOW());
 
 -- Insert games
 INSERT INTO card_game (name) VALUES 

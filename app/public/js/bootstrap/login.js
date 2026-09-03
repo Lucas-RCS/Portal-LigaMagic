@@ -118,7 +118,7 @@ function onSubmit(submitBtn, usernameInput, passwordInput) {
       }
       showToast("Login realizado com sucesso.", "success");
       sessionStorage.setItem("showWelcomeToast", "true");
-      /* window.location.href = ""; */
+      window.location.href = "home.php";
     } catch (error) {
       console.error(error);
       showToast("Não foi possível realizar o login.", "error");
