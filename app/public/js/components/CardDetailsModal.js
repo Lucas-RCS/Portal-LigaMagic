@@ -21,6 +21,8 @@ export class CardDetailsModal extends Modal {
     panel.className = "modal-panel";
     overlay.append(panel);
 
+    console.log(card);
+
     panel.append(
       this.#createHeader(),
       this.#createBody(card, rarity),
@@ -67,18 +69,31 @@ export class CardDetailsModal extends Modal {
       imageWrapper.append(placeholder);
     }
 
+    const info = document.createElement("div");
+
+    const title = document.createElement("div");
+    title.className = "card-details-title";
+
+    const name = document.createElement("h3");
+    name.textContent = card.name_ing;
+
+    const badge = document.createElement("span");
+    badge.className = `badge badge--${rarity?.cssClass ?? "comum"}`;
+    badge.textContent = rarity?.label ?? card.rarity;
+
+    title.append(name, badge);
+
     const list = document.createElement("dl");
     list.className = "card-details-list";
     list.append(
-      this.#createRow("Nome (Inglês)", card.name_ing),
       this.#createRow("Nome (Português)", card.name_por || "—"),
       this.#createRow("Card Game", card.game_name),
       this.#createRow("Edição", card.edition_name),
-      this.#createRarityRow(rarity, card.rarity),
       this.#createImageUrlRow(card.image),
     );
 
-    body.append(imageWrapper, list);
+    info.append(title, list);
+    body.append(imageWrapper, info);
     return body;
   }
 
@@ -95,24 +110,9 @@ export class CardDetailsModal extends Modal {
     return row;
   }
 
-  #createRarityRow(rarity, rawRarity) {
-    const row = document.createElement("div");
-
-    const dt = document.createElement("dt");
-    dt.textContent = "Raridade";
-
-    const dd = document.createElement("dd");
-    const badge = document.createElement("span");
-    badge.className = `badge badge--${rarity?.cssClass ?? "common"}`;
-    badge.textContent = rarity?.label ?? rawRarity;
-    dd.append(badge);
-
-    row.append(dt, dd);
-    return row;
-  }
-
   #createImageUrlRow(image) {
     const row = document.createElement("div");
+    row.className = "details-row--full";
 
     const dt = document.createElement("dt");
     dt.textContent = "Imagem (URL)";

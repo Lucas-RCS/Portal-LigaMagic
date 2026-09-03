@@ -147,9 +147,9 @@ export class CardFormModal extends Modal {
     return option;
   }
 
-  #createField(labelText, inputEl) {
+  #createField(labelText, inputEl, { full = false } = {}) {
     const field = document.createElement("div");
-    field.className = "field";
+    field.className = full ? "field field--full" : "field";
 
     const label = document.createElement("label");
     label.textContent = labelText;
@@ -163,7 +163,7 @@ export class CardFormModal extends Modal {
     overlay.className = "modal-overlay";
 
     const panel = document.createElement("div");
-    panel.className = "modal-panel";
+    panel.className = "modal-panel modal-panel--lg";
     overlay.append(panel);
 
     panel.append(this.#createHeader(card), this.#createForm(card));
@@ -174,8 +174,18 @@ export class CardFormModal extends Modal {
     const header = document.createElement("header");
     header.className = "modal-header";
 
+    const headerText = document.createElement("div");
+    headerText.className = "modal-header-text";
+
     const title = document.createElement("h2");
     title.textContent = card ? "Editar Carta" : "Nova Carta";
+
+    const subtitle = document.createElement("p");
+    subtitle.textContent = card
+      ? "Atualize as informações da carta selecionada."
+      : "Preencha os dados para cadastrar uma nova carta.";
+
+    headerText.append(title, subtitle);
 
     const closeBtn = document.createElement("button");
     closeBtn.type = "button";
@@ -184,7 +194,7 @@ export class CardFormModal extends Modal {
     closeBtn.setAttribute("aria-label", "Fechar");
     closeBtn.textContent = "×";
 
-    header.append(title, closeBtn);
+    header.append(headerText, closeBtn);
     return header;
   }
 
@@ -240,8 +250,8 @@ export class CardFormModal extends Modal {
       this.#createField("Nome da Carta (Português)", namePorInput),
       this.#createField("Card Game *", gameSelect),
       this.#createField("Edição da Carta *", editionSelect),
-      this.#createField("Imagem da Carta (URL)", imageInput),
-      this.#createField("Raridade da Carta *", raritySelect),
+      this.#createField("Imagem da Carta (URL)", imageInput, { full: true }),
+      this.#createField("Raridade da Carta *", raritySelect, { full: true }),
       this.#createFooter(card),
     );
 
@@ -250,7 +260,7 @@ export class CardFormModal extends Modal {
 
   #createFooter(card) {
     const footer = document.createElement("footer");
-    footer.className = "modal-footer";
+    footer.className = "modal-footer field--full";
 
     const cancelBtn = document.createElement("button");
     cancelBtn.type = "button";

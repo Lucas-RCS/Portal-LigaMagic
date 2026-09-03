@@ -1,6 +1,4 @@
-/* =========================================================
-   PAGE HEADER
-   ========================================================= */
+@import url("global.css");
 
 .page-header {
   display: flex;
@@ -214,10 +212,20 @@
 .badge {
   display: inline-flex;
   align-items: center;
+  gap: var(--spacing-2);
   padding: var(--spacing-1) var(--spacing-3);
   border-radius: var(--radius-full);
   font-size: var(--font-size-xs);
   font-weight: 700;
+}
+
+.badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: currentColor;
 }
 
 .badge--common {
@@ -299,7 +307,8 @@
   align-items: center;
   justify-content: center;
   padding: var(--spacing-4);
-  background: color-mix(in srgb, var(--color-neutral-900) 55%, transparent);
+  background: color-mix(in srgb, var(--color-neutral-900) 60%, transparent);
+  backdrop-filter: blur(3px);
   opacity: 0;
   transition: opacity var(--transition-normal);
 }
@@ -309,50 +318,88 @@
 }
 
 .modal-panel {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: 460px;
+  max-width: 700px;
   max-height: 90vh;
-  overflow-y: auto;
   background: var(--color-neutral-0);
   border-radius: var(--radius-2xl);
   box-shadow: 0 28px 65px
     color-mix(in srgb, var(--color-neutral-900) 25%, transparent);
-  transform: translateY(12px);
-  transition: transform var(--transition-normal);
+  transform: translateY(12px) scale(0.98);
+  transition:
+    transform var(--transition-normal),
+    opacity var(--transition-normal);
 }
 
 .modal-overlay.is-open .modal-panel {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .modal-panel--sm {
   max-width: 400px;
 }
 
+.modal-panel--lg {
+  max-width: 620px;
+}
+
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--spacing-4);
   padding: var(--spacing-5) var(--spacing-6);
   border-bottom: 1px solid var(--color-border-light);
+  flex-shrink: 0;
+}
+
+.modal-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .modal-header h2 {
   margin: 0;
   font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.modal-header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
 }
 
 .modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
   border: none;
+  border-radius: var(--radius-full);
   background: transparent;
   font-size: var(--font-size-2xl);
   line-height: 1;
   color: var(--color-text-tertiary);
   cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.modal-close:hover {
+  background: var(--color-neutral-100);
+  color: var(--color-text-primary);
 }
 
 .modal-body {
   padding: var(--spacing-6);
+  overflow-y: auto;
 }
 
 .modal-footer {
@@ -361,18 +408,33 @@
   gap: var(--spacing-3);
   padding: var(--spacing-5) var(--spacing-6);
   border-top: 1px solid var(--color-border-light);
+  flex-shrink: 0;
 }
 
+/* Rodapé embutido dentro de um formulário em grid (quebra o padding do modal-body) */
+.card-form .modal-footer {
+  margin: var(--spacing-2) calc(var(--spacing-6) * -1)
+    calc(var(--spacing-6) * -1);
+}
+
+/* =========================================================
+   FORMULÁRIO DA CARTA
+   ========================================================= */
+
 .card-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-5) var(--spacing-4);
 }
 
 .card-form .field {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2);
+}
+
+.card-form .field--full {
+  grid-column: 1 / -1;
 }
 
 .card-form label {
@@ -390,6 +452,9 @@
   background: var(--color-neutral-50);
   color: var(--color-text-primary);
   font-size: var(--font-size-md);
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast);
 }
 
 .card-form input:focus,
@@ -399,29 +464,66 @@
   border-color: var(--color-border-focus);
 }
 
-/* Detalhes da carta */
+.card-form select:disabled {
+  background: var(--color-neutral-100);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+
+@media (max-width: 560px) {
+  .card-form {
+    grid-template-columns: 1fr;
+  }
+
+  .card-form .field {
+    grid-column: 1 / -1;
+  }
+}
+
+/* =========================================================
+   DETALHES DA CARTA
+   ========================================================= */
 
 .card-details {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-5);
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: var(--spacing-6);
+  align-items: start;
 }
 
 .card-details-image img,
 .card-details-image .card-thumb-placeholder {
   width: 100%;
-  max-width: 160px;
   aspect-ratio: 3 / 4;
   border-radius: var(--radius-lg);
   object-fit: cover;
-  margin: 0 auto;
+  box-shadow: 0 6px 16px
+    color-mix(in srgb, var(--color-neutral-900) 15%, transparent);
+}
+
+.card-details-title {
+  margin: 0 0 var(--spacing-4);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+.card-details-title h3 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
 }
 
 .card-details-list {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-3);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-4);
+}
+
+.card-details-list .details-row--full {
+  grid-column: 1 / -1;
 }
 
 .card-details-list > div {
@@ -435,6 +537,7 @@
   color: var(--color-text-tertiary);
   text-transform: uppercase;
   font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
 .card-details-list dd {
@@ -443,12 +546,29 @@
   word-break: break-all;
 }
 
-/* Confirmação de exclusão */
+@media (max-width: 560px) {
+  .card-details {
+    grid-template-columns: 1fr;
+  }
+
+  .card-details-image img,
+  .card-details-image .card-thumb-placeholder {
+    max-width: 160px;
+    margin: 0 auto;
+  }
+
+  .card-details-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   CONFIRMAÇÃO DE EXCLUSÃO
+   ========================================================= */
 
 .confirm-delete {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  justify-items: center;
   text-align: center;
   gap: var(--spacing-2);
 }
@@ -457,13 +577,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--spacing-1);
   border-radius: var(--radius-full);
   background: var(--color-error-50);
   color: var(--color-error-600);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
+  box-shadow: 0 0 0 6px
+    color-mix(in srgb, var(--color-error-50) 60%, transparent);
 }
 
 .confirm-title {
@@ -479,13 +600,15 @@
 }
 
 .confirm-card-preview {
-  width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 48px 1fr;
   align-items: center;
   gap: var(--spacing-3);
+  width: 100%;
   padding: var(--spacing-3);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+  background: var(--color-neutral-50);
   text-align: left;
 }
 
@@ -497,15 +620,44 @@
   object-fit: cover;
 }
 
-.confirm-card-preview > div {
+.confirm-card-preview-info {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: 2px;
+  min-width: 0;
 }
 
-.confirm-card-preview span {
+.confirm-card-preview-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+}
+
+.confirm-card-preview-heading strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.confirm-card-preview-heading .badge {
+  flex-shrink: 0;
+}
+
+.confirm-card-preview-subtitle {
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.confirm-delete + .modal-footer .btn {
+  flex: 1;
+}
+
+.confirm-delete + .modal-footer .btn svg {
+  flex-shrink: 0;
 }
 
 @media (max-width: 640px) {

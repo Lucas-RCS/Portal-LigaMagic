@@ -70,10 +70,6 @@ export class ConfirmDeleteModal extends Modal {
     const body = document.createElement("div");
     body.className = "modal-body confirm-delete";
 
-    const icon = document.createElement("div");
-    icon.className = "confirm-icon";
-    icon.textContent = "!";
-
     const title = document.createElement("p");
     title.className = "confirm-title";
     title.textContent = "Tem certeza que deseja excluir esta carta?";
@@ -82,41 +78,16 @@ export class ConfirmDeleteModal extends Modal {
     subtitle.className = "confirm-subtitle";
     subtitle.textContent = "Essa ação não pode ser desfeita.";
 
-    body.append(icon, title, subtitle, this.#createCardPreview(card, rarity));
+    body.append(this.#createIcon(), title, subtitle);
     return body;
   }
 
-  #createCardPreview(card, rarity) {
-    const preview = document.createElement("div");
-    preview.className = "confirm-card-preview";
-
-    if (card.image) {
-      const img = document.createElement("img");
-      img.src = card.image;
-      img.alt = card.name_ing;
-      preview.append(img);
-    } else {
-      const placeholder = document.createElement("div");
-      placeholder.className = "card-thumb-placeholder";
-      placeholder.textContent = "Sem imagem";
-      preview.append(placeholder);
-    }
-
-    const info = document.createElement("div");
-
-    const name = document.createElement("strong");
-    name.textContent = card.name_ing;
-
-    const gameEdition = document.createElement("span");
-    gameEdition.textContent = `${card.game_name} - ${card.edition_name}`;
-
-    const badge = document.createElement("span");
-    badge.className = `badge badge--${rarity?.cssClass ?? "common"}`;
-    badge.textContent = rarity?.label ?? card.rarity;
-
-    info.append(name, gameEdition, badge);
-    preview.append(info);
-    return preview;
+  #createIcon() {
+    const icon = document.createElement("div");
+    icon.className = "confirm-icon";
+    icon.innerHTML =
+      '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 17h.01"/></svg>';
+    return icon;
   }
 
   #createFooter() {
@@ -133,7 +104,8 @@ export class ConfirmDeleteModal extends Modal {
     confirmBtn.type = "button";
     confirmBtn.className = "btn btn-danger";
     confirmBtn.dataset.confirmDelete = "";
-    confirmBtn.textContent = "Excluir Carta";
+    confirmBtn.innerHTML =
+      '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg><span>Excluir Carta</span>';
 
     footer.append(cancelBtn, confirmBtn);
     return footer;

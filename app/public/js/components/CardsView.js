@@ -303,18 +303,23 @@ export class CardsView {
             id: 1,
             name_ing: "Test Card 1",
             name_por: "Carta Teste 1",
-            rarity: "common",
-            image: "",
+            rarity: "comum",
+            game_name: "Magic: The Gathering",
+            edition_name: "Edição Teste",
+            image:
+              "https://gatherer-static.wizards.com/Cards/medium/8EF154010202F1165F73FEC893EBED861411C88F00BD065B1839C8736376C455.webp",
           },
           {
             id: 2,
             name_ing: "Test Card 2",
             name_por: "Carta Teste 2",
-            rarity: "rare",
+            rarity: "rara",
+            game_name: "Magic: The Gathering",
+            edition_name: "Edição Teste",
             image: "",
           },
         ],
-        total: 0,
+        total: 2,
         page: this.#page,
         per_page: PAGE_SIZE,
       };
@@ -362,7 +367,7 @@ export class CardsView {
         });
 
     const badge = el("span", {
-      attrs: { class: `badge badge--${rarity?.cssClass ?? "common"}` },
+      attrs: { class: `badge badge--${rarity?.cssClass ?? "comum"}` },
       text: rarity?.label ?? card.rarity,
     });
 
@@ -424,13 +429,14 @@ export class CardsView {
     try {
       //Make fetch
       const card = {
-        id,
-        name_ing: "Test Card",
-        name_por: "Carta de Teste",
-        game_name: "Test Game",
-        edition_name: "Test Edition",
-        rarity: "common",
-        image: null,
+        id: 1,
+        name_ing: "Test Card 1",
+        name_por: "Carta Teste 1",
+        rarity: "mitica",
+        game_name: "Magic: The Gathering",
+        edition_name: "Edição Teste",
+        image:
+          "https://gatherer-static.wizards.com/Cards/medium/8EF154010202F1165F73FEC893EBED861411C88F00BD065B1839C8736376C455.webp",
       };
 
       if (action === "view") this.detailsModal.open(card);
