@@ -1,0 +1,39 @@
+services:
+  apache:
+    image: php:8.2-apache
+    container_name: apache
+    ports:
+      - "${APP_PORT:-80}:80"
+    volumes:
+      - ./app:/var/www/html
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+    command: >
+      bash -c "docker-php-ext-install mysqli pdo_mysql && apache2-foreground"
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-app_db}
+      MYSQL_USER: ${MYSQL_USER:-app_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-app_pass}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
