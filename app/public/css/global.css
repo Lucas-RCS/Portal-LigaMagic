@@ -1,0 +1,172 @@
+:root {
+  /* =========================================================
+     BRAND / CORES PRINCIPAIS
+     ========================================================= */
+
+  --color-primary-50: #fff7f2;
+  --color-primary-100: #ffeadc;
+  --color-primary-200: #ffd0b8;
+  --color-primary-300: #ffb18a;
+  --color-primary-400: #ff8a52;
+  --color-primary-500: #ff5a00;
+  --color-primary-600: #e94f00;
+  --color-primary-700: #c94300;
+  --color-primary-800: #a83700;
+  --color-primary-900: #872f00;
+
+  /* =========================================================
+     CORES NEUTRAS
+     ========================================================= */
+
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f8f9fa;
+  --color-neutral-100: #f1f3f5;
+  --color-neutral-200: #e9ecef;
+  --color-neutral-300: #dee2e6;
+  --color-neutral-400: #ced4da;
+  --color-neutral-500: #adb5bd;
+  --color-neutral-600: #868e96;
+  --color-neutral-700: #495057;
+  --color-neutral-800: #343a40;
+  --color-neutral-900: #212529;
+
+  /* Preto utilizado na navegação */
+  --color-black-900: #161616;
+  --color-black-800: #1d1d1d;
+  --color-black-700: #252525;
+
+  /* =========================================================
+     CORES DE TEXTO
+     ========================================================= */
+
+  --color-text-primary: #171717;
+  --color-text-secondary: #5f6368;
+  --color-text-tertiary: #8a8f98;
+  --color-text-disabled: #adb5bd;
+  --color-text-inverse: #ffffff;
+
+  /* =========================================================
+     CORES DE FUNDO
+     ========================================================= */
+
+  --color-background: #dfdfdf;
+  --color-background-secondary: #eeeeee;
+  --color-background-tertiary: #e7e7e7;
+
+  /* =========================================================
+     BORDAS
+     ========================================================= */
+
+  --color-border: #e2e5e8;
+  --color-border-light: #edf0f2;
+  --color-border-dark: #cfd3d7;
+  --color-border-focus: var(--color-primary-500);
+
+  /* =========================================================
+     ESTADOS
+     ========================================================= */
+
+  --color-success-50: #edf9f1;
+  --color-success-100: #d5f2dd;
+  --color-success-500: #2e9b4f;
+  --color-success-600: #258241;
+  --color-success-700: #1d6935;
+
+  --color-warning-50: #fff8e6;
+  --color-warning-100: #ffedb8;
+  --color-warning-500: #f5a900;
+  --color-warning-600: #d99100;
+  --color-warning-700: #b97800;
+
+  --color-error-50: #fff0f0;
+  --color-error-100: #ffd8d8;
+  --color-error-500: #e53935;
+  --color-error-600: #d32f2f;
+  --color-error-700: #b71c1c;
+
+  --color-info-50: #eef6ff;
+  --color-info-100: #d9ebff;
+  --color-info-500: #2878d4;
+  --color-info-600: #2167b7;
+  --color-info-700: #1b5698;
+
+  /* =========================================================
+     RARIDADES
+     ========================================================= */
+
+  --rarity-common-bg: #eef0f2;
+  --rarity-common-text: #495057;
+
+  --rarity-uncommon-bg: #e7f5df;
+  --rarity-uncommon-text: #4c8c25;
+
+  --rarity-rare-bg: #fff0c7;
+  --rarity-rare-text: #b97900;
+
+  --rarity-mythic-bg: #ffe1d5;
+  --rarity-mythic-text: #d64b19;
+
+  --rarity-ultra-bg: #eadcff;
+  --rarity-ultra-text: #7b3fd1;
+
+  /* =========================================================
+     TAMANHOS DE FONTE
+     ========================================================= */
+
+  --font-size-xs: 0.6875rem; /* 11px */
+  --font-size-sm: 0.75rem; /* 12px */
+  --font-size-md: 0.875rem; /* 14px */
+  --font-size-lg: 1rem; /* 16px */
+  --font-size-xl: 1.125rem; /* 18px */
+  --font-size-2xl: 1.25rem; /* 20px */
+  --font-size-3xl: 1.5rem; /* 24px */
+  --font-size-4xl: 1.75rem; /* 28px */
+  --font-size-5xl: 2rem; /* 32px */
+
+  /* =========================================================
+     TIPOGRAFIA
+     ========================================================= */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* =========================================================
+     ESPAÇAMENTOS
+     ========================================================= */
+
+  --spacing-0: 0;
+  --spacing-1: 0.25rem; /* 4px */
+  --spacing-2: 0.5rem; /* 8px */
+  --spacing-3: 0.75rem; /* 12px */
+  --spacing-4: 1rem; /* 16px */
+  --spacing-5: 1.25rem; /* 20px */
+  --spacing-6: 1.5rem; /* 24px */
+  --spacing-7: 1.75rem; /* 28px */
+  --spacing-8: 2rem; /* 32px */
+  --spacing-10: 2.5rem; /* 40px */
+  --spacing-12: 3rem; /* 48px */
+  --spacing-16: 4rem; /* 64px */
+  --spacing-20: 5rem; /* 80px */
+
+  /* =========================================================
+     BORDER RADIUS
+     ========================================================= */
+
+  --radius-none: 0;
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.375rem; /* 6px */
+  --radius-lg: 0.5rem; /* 8px */
+  --radius-xl: 0.75rem; /* 12px */
+  --radius-2xl: 1rem; /* 16px */
+  --radius-full: 9999px;
+
+  /* =========================================================
+     TRANSIÇÕES
+     ========================================================= */
+
+  --transition-fast: 120ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 300ms ease;
+}
