@@ -1,6 +1,8 @@
 import { Modal } from "./Modal.js";
 import { RARITIES } from "../utils/constants.js";
 import { showToast } from "../index.js";
+import { fetchCardGames, fetchEditionsByGame } from "../api/game.js";
+import { createCard, updateCard } from "../api/card.js";
 
 /**
  * Card creation/editing modal with the Edition field dependent on the selected Card Game.
@@ -29,13 +31,7 @@ export class CardFormModal extends Modal {
     const editionSelect = this.element.querySelector("[data-edition-select]");
 
     try {
-      // make a fetch
-
-      this.#games = [
-        { id: 1, name: "Magic: The Gathering" },
-        { id: 2, name: "Yu-Gi-Oh!" },
-        { id: 3, name: "Pokémon" },
-      ];
+      this.#games = await fetchCardGames();
     } catch (error) {
       console.error(error);
       showToast("Não foi possível carregar os card games.", "error");
@@ -82,13 +78,7 @@ export class CardFormModal extends Modal {
     );
 
     try {
-      // make a fetch
-
-      const editions = [
-        { id: 1, name: "Edição 1" },
-        { id: 2, name: "Edição 2" },
-        { id: 3, name: "Edição 3" },
-      ];
+      const editions = await fetchEditionsByGame(gameId);
 
       editionSelect.replaceChildren(
         this.#createOption("", "Selecione uma edição"),
@@ -123,10 +113,10 @@ export class CardFormModal extends Modal {
 
     try {
       if (this.#card) {
-        // update the card - make fetch
+        await updateCard(this.#card.id, data);
         showToast("Carta atualizada com sucesso.", "success");
       } else {
-        // create a new card - make fetch
+        await createCard(data);
         showToast("Carta cadastrada com sucesso.", "success");
       }
 
@@ -244,6 +234,7 @@ export class CardFormModal extends Modal {
       this.#createOption("", "Selecione a raridade"),
       ...RARITIES.map((rarity) => this.#createOption(rarity.id, rarity.label)),
     );
+    raritySelect.value = card?.rarity ?? "";
 
     form.append(
       this.#createField("Nome da Carta (Inglês) *", nameIngInput),

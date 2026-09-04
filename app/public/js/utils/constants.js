@@ -6,7 +6,7 @@ export const RARITIES = [
   { id: "ultra-rara", label: "Ultra Rara", cssClass: "ultra" },
 ];
 
-export const PAGE_SIZE = 5;
+export const PAGE_SIZE = 7;
 
 export function getRarity(id) {
   return RARITIES.find((rarity) => rarity.id === id) ?? null;

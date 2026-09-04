@@ -21,8 +21,6 @@ export class CardDetailsModal extends Modal {
     panel.className = "modal-panel";
     overlay.append(panel);
 
-    console.log(card);
-
     panel.append(
       this.#createHeader(),
       this.#createBody(card, rarity),

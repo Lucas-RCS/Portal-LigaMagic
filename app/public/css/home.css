@@ -9,7 +9,6 @@ body {
   margin: 0;
   min-height: 100%;
   font-family: sans-serif;
-  background: var(--color-background);
   color: var(--color-text-primary);
   padding: var(--spacing-1);
 }
@@ -18,7 +17,7 @@ body {
   display: flex;
   height: auto;
   min-height: 100%;
-  gap: var(--spacing-4);
+  gap: var(--spacing-2);
   align-items: stretch;
 }
 
@@ -83,7 +82,6 @@ body {
     background var(--transition-fast),
     border-color var(--transition-fast),
     color var(--transition-fast),
-    transform var(--transition-fast),
     box-shadow var(--transition-fast);
 }
 
@@ -91,7 +89,6 @@ body {
   background: rgba(255, 255, 255, 0.09);
   border-color: rgba(255, 255, 255, 0.1);
   color: var(--color-text-inverse);
-  transform: translateX(3px);
 }
 
 .sidebar-link:focus-visible {
@@ -150,15 +147,9 @@ body {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.7),
-    rgba(248, 249, 250, 0.96)
-  );
-  border: 1px solid rgba(23, 23, 23, 0.05);
-  border-radius: var(--radius-2xl);
+  background: transparent;
+
   overflow: hidden;
-  box-shadow: 0 12px 28px rgba(24, 24, 24, 0.08);
 }
 
 .topbar {
@@ -166,9 +157,9 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-4);
-  background: rgba(255, 255, 255, 0.78);
-  border-bottom: 1px solid rgba(23, 23, 23, 0.05);
-  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 12px 28px rgba(24, 24, 24, 0.08);
 }
 
 .topbar-copy {
@@ -198,9 +189,8 @@ body {
   width: 36px;
   height: 36px;
   padding: 0;
-  border: none;
   border-radius: var(--radius-lg);
-  background: transparent;
+  border: 1px solid var(--color-border);
   color: var(--color-text-tertiary);
   cursor: pointer;
   transition:
@@ -224,8 +214,18 @@ body {
 }
 
 .icon-btn--danger:hover {
-  background: var(--color-error-50);
+  background: var(--color-error-100);
   color: var(--color-error-600);
+}
+
+.icon-btn--edit:hover {
+  background: var(--color-primary-100);
+  color: var(--color-primary-600);
+}
+
+.icon-btn--view:hover {
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-600);
 }
 
 .user-menu {
@@ -263,7 +263,6 @@ body {
   flex: 1;
   padding: var(--spacing-5);
   overflow-x: auto;
-  background: rgba(255, 255, 255, 0.12);
 }
 
 @media (max-width: 768px) {

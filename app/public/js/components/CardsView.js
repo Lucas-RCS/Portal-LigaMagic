@@ -4,6 +4,8 @@ import { showToast } from "../index.js";
 import { CardFormModal } from "./CardFormModal.js";
 import { CardDetailsModal } from "./CardDetailsModal.js";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal.js";
+import { fetchCardGames, fetchEditionsByGame } from "../api/game.js";
+import { fetchCards, fetchCard, deleteCard } from "../api/card.js";
 
 const SVGs = {
   search: `<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>`,
@@ -185,12 +187,7 @@ export class CardsView {
     const gameFilter = this.#root.querySelector("[data-filter-game]");
 
     try {
-      // make fetch
-
-      const games = [
-        { id: 1, name: "Test Game 1" },
-        { id: 2, name: "Test Game 2" },
-      ];
+      const games = await fetchCardGames();
       gameFilter.replaceChildren(
         this.#createOption("", "Todos os Card Games"),
         ...games.map((game) => this.#createOption(game.id, game.name)),
@@ -235,12 +232,7 @@ export class CardsView {
         editionFilter.replaceChildren(this.#createOption("", "Carregando..."));
 
         try {
-          // make fetch
-
-          const editions = [
-            { id: 1, name: "Test Edition 1" },
-            { id: 2, name: "Test Edition 2" },
-          ];
+          const editions = await fetchEditionsByGame(gameFilter.value);
 
           editionFilter.replaceChildren(
             this.#createOption("", "Todas as Edições"),
@@ -296,40 +288,17 @@ export class CardsView {
     tbody.replaceChildren(this.#createStateRow("Carregando cartas..."));
 
     try {
-      // Mke API call to fetch cards
-      const result = {
-        items: [
-          {
-            id: 1,
-            name_ing: "Test Card 1",
-            name_por: "Carta Teste 1",
-            rarity: "comum",
-            game_name: "Magic: The Gathering",
-            edition_name: "Edição Teste",
-            image:
-              "https://gatherer-static.wizards.com/Cards/medium/8EF154010202F1165F73FEC893EBED861411C88F00BD065B1839C8736376C455.webp",
-          },
-          {
-            id: 2,
-            name_ing: "Test Card 2",
-            name_por: "Carta Teste 2",
-            rarity: "rara",
-            game_name: "Magic: The Gathering",
-            edition_name: "Edição Teste",
-            image: "",
-          },
-        ],
-        total: 2,
+      const { items, total, page, per_page } = await fetchCards({
+        ...this.#filters,
         page: this.#page,
         per_page: PAGE_SIZE,
-      };
-      this.#renderRows(result.items);
-      this.#renderFooter(
-        result.items.length,
-        result.total,
-        result.page,
-        result.per_page,
-      );
+      });
+
+      this.#total = total;
+      this.#page = page;
+
+      this.#renderRows(items);
+      this.#renderFooter(items.length, total, page, per_page);
     } catch (error) {
       console.error(error);
       tbody.replaceChildren(
@@ -376,12 +345,14 @@ export class CardsView {
       card.id,
       "Ver detalhes",
       SVGs.eye,
+      "icon-btn icon-btn--view",
     );
     const editButton = this.#createActionButton(
       "edit",
       card.id,
       "Editar",
       SVGs.edit,
+      "icon-btn icon-btn--edit",
     );
     const deleteButton = this.#createActionButton(
       "delete",
@@ -427,17 +398,7 @@ export class CardsView {
     const action = button.dataset.action;
 
     try {
-      //Make fetch
-      const card = {
-        id: 1,
-        name_ing: "Test Card 1",
-        name_por: "Carta Teste 1",
-        rarity: "mitica",
-        game_name: "Magic: The Gathering",
-        edition_name: "Edição Teste",
-        image:
-          "https://gatherer-static.wizards.com/Cards/medium/8EF154010202F1165F73FEC893EBED861411C88F00BD065B1839C8736376C455.webp",
-      };
+      const card = await fetchCard(id);
 
       if (action === "view") this.detailsModal.open(card);
       if (action === "edit") this.formModal.open(card);
@@ -450,8 +411,7 @@ export class CardsView {
 
   async #handleDelete(card) {
     try {
-      // make fetch delete
-
+      await deleteCard(card.id);
       showToast("Carta excluída com sucesso.", "success");
 
       if (this.#page > 1 && this.#total - 1 <= (this.#page - 1) * PAGE_SIZE) {

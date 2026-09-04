@@ -83,8 +83,8 @@ INSERT INTO card_game_edition (name, game_id) VALUES
 
 -- Insert sample cards (initial seed data)
 INSERT INTO card (name_ing, name_por, game_id, edition_id, image, rarity) VALUES
-('Black Lotus', 'Lótus Negra', 1, 1, 'https://gatherer-static.wizards.com/Cards/medium/8EF154010202F1165F73FEC893EBED861411C88F00BD065B1839C8736376C455.webp', 'mitica'),
-('Pikachu', 'Pikachu', 2, 8, 'https://gatherer-static.wizards.com/Cards/medium/B9DF5A112A43051D8869ED651B05A4F2E0A2D2FD446B7112CFBA1138F990DA04.webp', 'rara'),
-('Blue-Eyes White Dragon', 'Dragão Branco de Olhos Azuis', 3, 11, 'https://gatherer-static.wizards.com/Cards/medium/E538EF6A7698980EEFBBE06CF2D20231D9A2692CF2C03DD3F5DAC263CB4C3B72.webp', 'ultra-rara'),
-('Charizard', 'Charizard', 2, 6, 'https://gatherer-static.wizards.com/Cards/medium/DF7F9619429903D3A77F5D349ACE92838ECDF7A081614AF719CDB7BAAD0C80A2.webp', 'rara'),
-('Lightning Bolt', 'Raio', 1, 5, 'https://gatherer-static.wizards.com/Cards/medium/0DF252CBC4D27AD1DAEBDD3D79E36BAEC42F452A8D85E86F79379865CAE7A146.webp', 'comum');
+('Black Lotus', 'Lótus Negra', 1, 1, 'https://repositorio.sbrauble.com/arquivos/in/magic/316/5f4243bcb4fea-6psa8u-bmqzh2-19055be5ac0bf0e333b42e1965c78eff.jpg', 'mitica'),
+('Pikachu', 'Pikachu', 2, 8, 'https://mcdn.pokemon.com/image/upload/c_fit,w_384,h_535/f_auto/q_auto:best/v1/live/pcom-cms/static-assets/cms3/br/img/trading-card-game/tiles/30th/cards/full/30th_PT-BR_23.png', 'rara'),
+('Blue-Eyes White Dragon', 'Dragão Branco de Olhos Azuis', 3, 11, 'https://repositorio.sbrauble.com/arquivos/in/yugioh_bkp/cd/249/134.jpg', 'ultra-rara'),
+('Charizard', 'Charizard', 2, 6, 'https://img.mypcards.com/img/2/2348/pokemon_mc24_001_015/pokemon_mc24_001_015_en-1771534423_thumb.jpg', 'rara'),
+('Lightning Bolt', 'Raio', 1, 5, 'https://repositorio.sbrauble.com/arquivos/in/magic/480968/6a29d4d1ca500-ptmb2-t5ler-3246d690edcb0d9a18099e37d07ede11.jpg', 'comum');

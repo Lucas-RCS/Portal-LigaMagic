@@ -88,7 +88,8 @@
   padding: var(--spacing-4);
   background: var(--color-neutral-0);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 12px 28px rgba(24, 24, 24, 0.08);
 }
 
 .filters-bar select,
@@ -143,9 +144,11 @@
    ========================================================= */
 
 .table-wrap {
+  min-height: 580px;
   background: var(--color-neutral-0);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 12px 28px rgba(24, 24, 24, 0.08);
   overflow-x: auto;
 }
 
