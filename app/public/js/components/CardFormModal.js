@@ -203,8 +203,9 @@ export class CardFormModal extends Modal {
     const namePorInput = document.createElement("input");
     namePorInput.type = "text";
     namePorInput.name = "name_por";
-    namePorInput.placeholder = "Ex: Lótus Negra (opcional)";
+    namePorInput.placeholder = "Ex: Lótus Negra";
     namePorInput.value = card?.name_por ?? "";
+    namePorInput.required = true;
 
     const gameSelect = document.createElement("select");
     gameSelect.name = "game_id";
@@ -238,7 +239,7 @@ export class CardFormModal extends Modal {
 
     form.append(
       this.#createField("Nome da Carta (Inglês) *", nameIngInput),
-      this.#createField("Nome da Carta (Português)", namePorInput),
+      this.#createField("Nome da Carta (Português) *", namePorInput),
       this.#createField("Card Game *", gameSelect),
       this.#createField("Edição da Carta *", editionSelect),
       this.#createField("Imagem da Carta (URL)", imageInput, { full: true }),

@@ -78,6 +78,8 @@ docker compose down
 
 - O backend foi organizado em controllers, services e repositories. Os controllers cuidam da requisição e resposta, os services concentram as regras do domínio e os repositories acessam o MySQL. Essa decisão facilita a manutenção, a validação do CRUD e futuras alterações sem misturar responsabilidades.
 
+- Também optei por armazenar as edições dos cards no banco de dados, permitindo centralizar essas informações e relacioná-las corretamente aos cards cadastrados. Embora o exercício sugerisse a utilização de um campo `VARCHAR` ou `CHAR` para os `IDs` das edições, utilizei um campo `INT` com `AUTO_INCREMENT`. Essa escolha segue o padrão de `IDs` das entidades relacionais, facilita o relacionamento entre as tabelas e garante `IDs` únicos gerenciados pelo próprio banco.
+
 ## Estrutura principal
 
 ```text
