@@ -30,6 +30,8 @@ Na raiz do projeto, execute:
 docker compose up -d
 ```
 
+> **Observação:** após iniciar os containers, aguarde alguns instantes para que o MySQL conclua sua inicialização e estabilize a conexão. Só então execute a próxima etapa; caso contrário, essa etapa poderá falhar.
+
 Importe o schema e os dados iniciais:
 
 ```bash
