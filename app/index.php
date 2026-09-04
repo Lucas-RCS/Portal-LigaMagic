@@ -15,7 +15,7 @@ if (!empty($_SESSION['logged'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal - LigaMagic</title>
-    <link rel="stylesheet" href="public/css/login.css">
+    <link rel="stylesheet" href="public/css/login.css?v=<?= time() ?>">
 </head>
 <body>
     <div class="page">
@@ -76,8 +76,8 @@ if (!empty($_SESSION['logged'])) {
                 </div>
             </form>
         </main>
-        <div class="copyright">© 2026 Portal. Todos os direitos reservados.</div>
+        <div class="copyright">© 2026 LigaMagic. Todos os direitos reservados.</div>
     </div>
-   <script type="module" src="public/js/bootstrap/login.js"></script>
+   <script type="module" src="public/js/bootstrap/login.js?v=<?= time() ?>"></script>
 </body>
 </html>

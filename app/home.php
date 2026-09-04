@@ -14,7 +14,7 @@ if (empty($_SESSION['logged'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador de Cartas · Portal</title>
-    <link rel="stylesheet" href="public/css/home.css">
+    <link rel="stylesheet" href="public/css/home.css?v=<?= time() ?>">
 </head>
 <body>
     <div class="app-shell">
@@ -60,6 +60,6 @@ if (empty($_SESSION['logged'])) {
     <script>
         window.username = "<?= $_SESSION["userName"] ?>";
     </script>
-    <script type="module" src="public/js/bootstrap/home.js"></script>
+    <script type="module" src="public/js/bootstrap/home.js?v=<?= time() ?>"></script>
 </body>
 </html>
